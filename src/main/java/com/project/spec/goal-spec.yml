@@ -1,0 +1,62 @@
+openapi: "3.0.0"
+info:
+  title: Goal Service
+  description: API Spec for Goal Service
+  version: 1.0.0
+paths:
+  /goals/{userId}:
+    get:
+      summary: Return list of goals for a given user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: userId.
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: A list of Goals
+components:
+  schemas:
+    UserDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        userName:
+          type: string
+        email:
+          type: string
+          format: email
+
+    GoalDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        dueDate:
+          type: string
+          format: date-time
+        category:
+          type: string
+        createdOn:
+          type: string
+          format: date-time
+        createdBy:
+          $ref: '#/components/schemas/UserDTO'
+
+    CategoryDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
