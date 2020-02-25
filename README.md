@@ -2,7 +2,14 @@
 
 ```text
     ToDo's :
-    Create new branch named as : Issue-1-spring-init
+    
+    Add Spring JPA Hibernate dependencies to pom.xml
+    Use flyway to generate database and schema.
+    Create schema goal .
+    Create table Category
+    Create package entity in src/main/java
+    Create Entity class Category
+
 ```
     
 
