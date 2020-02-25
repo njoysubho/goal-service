@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CategoryController {
-   @RequestMapping(path = "/goals",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-   public HttpStatus getGoals(){
+   @RequestMapping(path = "/categories",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+   public HttpStatus getCategories(){
         return HttpStatus.OK;
    }
 }
