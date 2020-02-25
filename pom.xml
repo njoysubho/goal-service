@@ -4,6 +4,7 @@
   <groupId>org.goal</groupId>
   <artifactId>goal-service</artifactId>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
   <name>goal-service</name>
   <url>http://maven.apache.org</url>
   <parent>
