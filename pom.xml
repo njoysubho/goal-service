@@ -17,18 +17,13 @@
     <maven.compiler.source>${jdk.version}</maven.compiler.source>
 </properties>
   <dependencies>
-      <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
       <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-web</artifactId>
-          <version>2.2.4.RELEASE</version>
       </dependency>
-      <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
       <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-data-jpa</artifactId>
-          <version>2.2.4.RELEASE</version>
-          <!--<scope>provided</scope> <scope>test</scope> -->
       </dependency>
       <dependency>
           <groupId>org.projectlombok</groupId>
