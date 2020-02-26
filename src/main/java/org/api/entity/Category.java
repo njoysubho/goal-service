@@ -19,25 +19,25 @@ import java.util.UUID;
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private  UUID id;
 
     @Column(name = "category_name")
-    private String category_Name;
+    private String categoryName;
 
     @Column(name = "created_by")
-    private UUID created_By;
+    private UUID createdBy;
 
     @Column(name = "created_on")
     @CreatedDate
-    private Timestamp created_On;
+    private Timestamp createdOn;
 
     @Column(name = "system_defined")
-    private Boolean system_Defined;
+    private Boolean systemDefined;
 
     @LastModifiedDate
     @Column(name = "modified_on")
-    private  Timestamp modified_On;
+    private  Timestamp modifiedOn;
 
     @Column(name = "tags")
     private String tags;
