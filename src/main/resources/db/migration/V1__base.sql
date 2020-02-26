@@ -1,4 +1,4 @@
-create schema if not exists goal
+create schema if not exists goal;
 SET search_path = goal, pg_catalog;
 
 CREATE TABLE IF NOT EXISTS goal.Category(
