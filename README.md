@@ -13,3 +13,6 @@ Step to check the branch:
 
 Note: in our case the jar_name is goal-service-1.0.0-SNAPSHOT
 ```
+
+test1
+test2
