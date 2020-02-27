@@ -1,10 +1,4 @@
-# goal-service
-
-```text
-    ToDo's :
-    Create new branch named as : Issue-1-spring-init
-```
-    
+# goal-service   
 
 ## Build 
 
