@@ -1,0 +1,9 @@
+micronaut:
+  application:
+    name: goal-service
+
+
+flyway:
+  datasources:
+    default:
+      locations: classpath:dbmigrations
