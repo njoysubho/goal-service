@@ -1,0 +1,23 @@
+micronaut:
+  application:
+    name: goal-service
+
+datasources:
+  default:
+    url: 'jdbc:postgresql://localhost:5432/goal-db'
+    username: 'test'
+    password: 'test'
+    driverClassName: 'org.postgresql.Driver'
+jpa:
+  default:
+    packages-to-scan:
+      - 'org.api.adaptor.persistence.entity'
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: none
+        show_sql: true
+flyway:
+  datasources:
+    default:
+      locations: classpath:dbmigrations

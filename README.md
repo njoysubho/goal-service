@@ -1,4 +1,4 @@
-# goal-service   
+# goal-org.api.service   
 
 ## Build 
 
@@ -11,5 +11,5 @@ Step to check the branch:
 ```
     1.List all the branches and current branch on top.
 
-Note: in our case the jar_name is goal-service-1.0.0-SNAPSHOT
+Note: in our case the jar_name is goal-org.api.service-1.0.0-SNAPSHOT
 ```
