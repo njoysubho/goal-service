@@ -23,4 +23,8 @@ class CategoryService(
         val uuid = UUID.fromString(id)
         return categoryDAO.findById(uuid);
     }
+
+    override fun getAllCategories(): List<Category> {
+        return categoryDAO.findAll();
+    }
 }

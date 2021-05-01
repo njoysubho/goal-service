@@ -1,0 +1,17 @@
+type Query {
+    categories: [Category!]
+    categoryById(id:ID):Category
+    goalById(id:ID): Goal
+}
+
+type Category{
+    name: String
+    id: String
+    tags: String!
+}
+
+type Goal{
+    id: String,
+    name: String
+    category: Category
+}

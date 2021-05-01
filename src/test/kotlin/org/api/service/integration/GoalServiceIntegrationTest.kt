@@ -8,9 +8,9 @@ import io.micronaut.test.extensions.junit5.annotation.MicronautTest
 import io.restassured.RestAssured
 import org.api.adaptor.repository.CategoryRepository
 import org.api.adaptor.repository.GoalRepository
-import org.api.controller.dtos.CategoryCreationRequestDTO
-import org.api.controller.dtos.CategoryCreationResponseDTO
-import org.api.controller.dtos.GoalCreationRequestDTO
+import org.api.adaptor.controller.dtos.CategoryCreationRequestDTO
+import org.api.adaptor.controller.dtos.CategoryCreationResponseDTO
+import org.api.adaptor.controller.dtos.GoalCreationRequestDTO
 import org.api.exception.ErrorCode
 import org.hamcrest.Matchers
 import org.hamcrest.Matchers.`is`
@@ -60,7 +60,7 @@ class GoalServiceIntegrationTest {
     @Test
     fun it_should_create_a_goal_with_category() {
         val categoryId = createCategory("category2")
-        var goalCreationRequest = GoalCreationRequestDTO(name = "testgoal2", "category2")
+        var goalCreationRequest = GoalCreationRequestDTO(name = "testgoal2", categoryId.toString())
         RestAssured.given()
             .header("content-type", "application/json")
             .body(goalCreationRequest).log().all()
@@ -69,13 +69,13 @@ class GoalServiceIntegrationTest {
             .statusCode(201)
             .body("id", notNullValue())
             .body("name", `is`("testgoal2"))
-            .body("categoryName", `is`("category2"))
+            .body("categoryId", `is`(categoryId.toString()))
             .body("createdOn", notNullValue())
     }
 
     @Test
     fun it_should_throw_exception_when_create_a_goal_with_non_existant_category() {
-        var goalCreationRequest = GoalCreationRequestDTO(name = "testgoal3", "category3")
+        var goalCreationRequest = GoalCreationRequestDTO(name = "testgoal3", UUID.randomUUID().toString())
         RestAssured.given()
             .header("content-type", "application/json")
             .body(goalCreationRequest).log().all()
@@ -87,25 +87,26 @@ class GoalServiceIntegrationTest {
 
     @Test
     fun it_should_fetch_all_goals() {
-        createCategory("category4")
-        createGoalWithCategory("testgoal4","category4");
-        createGoalWithCategory("testgoal5","category4");
-        createGoalWithCategory("testgoal6","category4");
+        val categoryId = createCategory("category4")
+        val id = createGoalWithCategory("testgoal4",categoryId.toString());
         RestAssured
             .`when`().get("/v1/goals").prettyPeek()
             .then()
             .statusCode(200)
-            .body("size()",`is`(3))
+            .body("size()",`is`(1))
     }
 
-    private fun createGoalWithCategory(goalName:String,categoryName:String) {
-        var goalCreationRequest = GoalCreationRequestDTO(name = goalName, categoryName)
-        RestAssured.given()
-            .header("content-type", "application/json")
-            .body(goalCreationRequest).log().all()
-            .`when`().post("/v1/goals")
-            .then()
-            .statusCode(201)
+    private fun createGoalWithCategory(goalName:String,categoryId:String):UUID? {
+        var goalCreationRequest = GoalCreationRequestDTO(name = goalName, categoryId)
+        val httpRequest = SimpleHttpRequest(
+            HttpMethod.POST,
+            "http://localhost:${RestAssured.port}/v1/goals",
+            goalCreationRequest
+        );
+        val response = httpClient.toBlocking().exchange(httpRequest, CategoryCreationResponseDTO::class.java);
+        val createdGoal = response.body();
+        Assertions.assertNotNull(createdGoal);
+        return createdGoal?.id
     }
 
 

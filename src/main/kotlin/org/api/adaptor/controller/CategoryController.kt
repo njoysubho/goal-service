@@ -1,9 +1,9 @@
-package org.api.controller
+package org.api.adaptor.controller
 
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
-import org.api.controller.dtos.CategoryCreationRequestDTO
-import org.api.controller.dtos.CategoryCreationResponseDTO
+import org.api.adaptor.controller.dtos.CategoryCreationRequestDTO
+import org.api.adaptor.controller.dtos.CategoryCreationResponseDTO
 import org.api.domain.Category
 import org.api.port.ICategoryService
 import javax.inject.Inject

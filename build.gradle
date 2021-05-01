@@ -16,7 +16,6 @@ repositories {
     maven {
         url = uri('https://repo.maven.apache.org/maven2/')
     }
-    jcenter()
 }
 
 group = 'org.api'
@@ -56,7 +55,8 @@ dependencies {
     implementation("io.micronaut:micronaut-inject:2.0.1")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.3")
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa:2.2.1")
-
+    implementation("io.micronaut.graphql:micronaut-graphql:2.2.0")
+    compile 'com.graphql-java-kickstart:graphql-java-tools:6.0.2'
     kapt("io.micronaut.data:micronaut-data-processor:2.2.3")
     kapt("io.micronaut.data:micronaut-data-processor:2.2.1")
     kapt("io.micronaut:micronaut-inject-java:2.0.1")

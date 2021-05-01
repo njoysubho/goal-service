@@ -1,11 +1,13 @@
-package org.api.controller
+package org.api.adaptor.controller
 
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
-import org.api.controller.dtos.GoalCreationRequestDTO
-import org.api.controller.dtos.GoalCreationResponseDTO
+import org.api.adaptor.controller.dtos.GoalCreationRequestDTO
+import org.api.adaptor.controller.dtos.GoalCreationResponseDTO
+import org.api.domain.Category
 import org.api.domain.Goal
 import org.api.service.GoalService
+import java.util.*
 import javax.inject.Inject
 
 @Controller
@@ -14,7 +16,10 @@ class GoalController(@Inject val goalService: GoalService) {
     @Produces
     @Consumes
     fun createGoal(@Body goalCreationRequestDTO: GoalCreationRequestDTO): HttpResponse<GoalCreationResponseDTO> {
-        val goal = Goal(name = goalCreationRequestDTO.name,categoryName = goalCreationRequestDTO.categoryName)
+        val goal = Goal(
+            name = goalCreationRequestDTO.name,
+            categoryId = goalCreationRequestDTO.categoryId?.let { it-> UUID.fromString(it) }
+        )
         val createdGoal = goalService.createGoal(goal)
         return HttpResponse.created(toResponse(createdGoal))
     }
@@ -31,7 +36,7 @@ class GoalController(@Inject val goalService: GoalService) {
         val goalCreationResponse = GoalCreationResponseDTO(
             id = createdGoal.id!!,
             name = createdGoal.name,
-            categoryName= createdGoal.categoryName,
+            categoryId = createdGoal.categoryId?.toString(),
             createdOn = createdGoal.createdOn.toString(),
             modifiedOn = createdGoal.modifiedOn.toString(),
             createdBy = createdGoal.createdBy

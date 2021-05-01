@@ -8,8 +8,8 @@ import javax.inject.Singleton
 
 @Produces
 @Singleton
-class CategoryNotFoundExceptionHandler : ExceptionHandler<CategoryNotFoundException, HttpResponse<Error>> {
-    override fun handle(request: HttpRequest<*>?, exception: CategoryNotFoundException): HttpResponse<Error> {
+class CategoryNotFoundExceptionHandler : ExceptionHandler<NotFoundException, HttpResponse<Error>> {
+    override fun handle(request: HttpRequest<*>?, exception: NotFoundException): HttpResponse<Error> {
         val error = Error(exception.message, ErrorCode.NOT_FOUND.code)
         return HttpResponse.notFound(error)
     }

@@ -3,7 +3,7 @@ package org.api.adaptor.persistence
 import org.api.adaptor.persistence.entity.CategoryEntity
 import org.api.adaptor.repository.CategoryRepository
 import org.api.domain.Category
-import org.api.exception.CategoryNotFoundException
+import org.api.exception.NotFoundException
 import org.api.port.ICategoryDAO
 import java.util.*
 import javax.inject.Inject
@@ -24,14 +24,19 @@ open class CategoryDAOImpl(
 
     override fun findById(id: UUID): Category {
         val categoryEntity = categoryRepository.findById(id)
-            .orElseThrow { CategoryNotFoundException("category with $id is not found") }
+            .orElseThrow { NotFoundException("category with $id is not found") }
         return toDomainCategory(categoryEntity)
     }
 
     override fun findByCategoryName(categoryName: String): Category {
         val categoryEntity = categoryRepository.findByCategoryName(categoryName)
-            .orElseThrow { CategoryNotFoundException("category with $categoryName is not found") }
+            .orElseThrow { NotFoundException("category with $categoryName is not found") }
         return toDomainCategory(categoryEntity)
+    }
+
+    override fun findAll(): List<Category> {
+        return categoryRepository.findAll()
+            .map { toDomainCategory(it) }
     }
 
     private fun toDomainCategory(categoryEntity: CategoryEntity): Category {
