@@ -1,8 +1,11 @@
 micronaut:
   application:
     name: goal-service
-
-
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
 flyway:
   datasources:
     default:
